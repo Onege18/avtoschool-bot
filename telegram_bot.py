@@ -315,9 +315,17 @@ telegram_app: Application = None  # объявим здесь глобально
 
 
 
-@api_app.api_route("/ping", methods=["GET", "HEAD"])
-def ping():
+from fastapi.responses import JSONResponse
+
+@api_app.get("/ping")
+def ping_get():
     return {"status": "ok"}
+
+@api_app.head("/ping")
+def ping_head():
+    return JSONResponse(status_code=200, content=None)
+
+
 
 import asyncio
 
